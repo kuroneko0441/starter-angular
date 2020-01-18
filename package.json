@@ -1,38 +1,56 @@
 {
   "name": "starter-angular-electron",
   "version": "0.0.0",
+  "main": "dist/electron-main.js",
+  "build": {
+    "appId": "com.kuroneko0441.starter-angular-electron",
+    "files": [
+      "dist/**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin"
+    ],
+    "directories": {
+      "output": "package"
+    }
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0 --proxy-config proxy.conf.json",
-    "build": "ng build --prod",
-    "test": "ng test  --watch false",
-    "lint": "ng lint",
+    "start:angular": "ng serve --host 0.0.0.0",
+    "start:electron": "electron .",
+    "build": "rimraf dist/ && npm run build:angular && npm run build:electron",
+    "build:angular": "ng build --prod",
+    "build:electron": "tsc --project tsconfig.electron.json",
+    "package": "electron-builder",
+    "test:angular": "ng test",
+    "lint": "ng lint && tslint --project tsconfig.electron.json",
     "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
+    "rxjs": "~6.4.0"
+  },
+  "devDependencies": {
     "@angular-builders/custom-webpack": "^8.4.1",
+    "@angular-devkit/build-angular": "~0.803.23",
     "@angular/animations": "~8.2.14",
+    "@angular/cli": "~8.3.23",
     "@angular/common": "~8.2.14",
     "@angular/compiler": "~8.2.14",
+    "@angular/compiler-cli": "~8.2.14",
     "@angular/core": "~8.2.14",
     "@angular/forms": "~8.2.14",
+    "@angular/language-service": "~8.2.14",
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
-    "rxjs": "~6.4.0",
-    "tslib": "^1.10.0",
-    "zone.js": "~0.9.1"
-  },
-  "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.23",
-    "@angular/cli": "~8.3.23",
-    "@angular/compiler-cli": "~8.2.14",
-    "@angular/language-service": "~8.2.14",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "electron": "^8.0.0",
+    "electron-builder": "^22.3.2",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
@@ -41,9 +59,12 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "protractor": "~5.4.0",
+    "rimraf": "^3.0.1",
     "ts-node": "~7.0.0",
+    "tslib": "^1.10.0",
     "tslint": "~5.15.0",
     "tslint-eslint-rules": "^5.4.0",
-    "typescript": "~3.5.3"
+    "typescript": "^3.5.3",
+    "zone.js": "~0.9.1"
   }
 }

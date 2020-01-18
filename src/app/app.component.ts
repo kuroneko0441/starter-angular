@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
 } from '@angular/core';
+import { SharedClass } from 'lib';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,6 @@ import {
   styleUrls: [ './app.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {}
+export class AppComponent {
+  public shared: SharedClass = new SharedClass();
+}

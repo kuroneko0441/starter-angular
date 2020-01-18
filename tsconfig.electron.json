@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "module": "commonjs",
+    "sourceMap": false,
+    "removeComments": true
+  },
+  "files": [
+    "src/electron-main.ts"
+  ]
+}
